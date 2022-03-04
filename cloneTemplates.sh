@@ -38,7 +38,7 @@ function cloneStockholm(){
 		--region "eu-north-1" \
 		--key-name "key-stockholm-1" \
 		--instance-type "${STOCKHOLM_INSTANCE_TYPE}" \
-		--security-groups "${STOCKHOLM_SECURITY_GROUPS}" \
+		--security-groups "ssh-22" \
 		--block-device-mappings "DeviceName=/dev/sda1,Ebs={VolumeSize=8}" \
 		| grep "InstanceId" | sed -E -e 's/\ |.*:|\,//g'
 }
@@ -49,7 +49,7 @@ function cloneFrankfurt(){
 		--region "eu-central-1" \
 		--key-name "key-frankfurt-1" \
 		--instance-type ${FRANKFURT_INSTANCE_TYPE} \
-		--security-groups "${FRANKFURT_SECURITY_GROUPS}" \
+		--security-groups "ssh-22" \
 		--block-device-mappings "DeviceName=/dev/sda1,Ebs={VolumeSize=8}" \
 		| grep "InstanceId" | sed -E -e 's/\ |.*:|\,//g'
 }
