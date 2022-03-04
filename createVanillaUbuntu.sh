@@ -14,7 +14,7 @@ function createStockholm(){
 		--image-id "${STOCKHOLM_VANILLA_IMAGE_UBUNTU}" \
 		--region "eu-north-1" \
 		--key-name "key-stockholm-1" \
-		--security-groups "launch-wizard-22" \
+		--security-groups "ssh-22" \
 		--instance-type "t3.micro" \
 		--block-device-mappings "DeviceName=/dev/sda1,Ebs={VolumeSize=8}" \
 		| grep "InstanceId" | sed -E -e 's/\ |.*:|\,//g'
@@ -25,7 +25,7 @@ function createFrankfurt(){
 		--image-id "${FRANKFURT_VANILLA_IMAGE_UBUNTU}" \
 		--region "eu-central-1" \
 		--key-name "key-frankfurt-1" \
-		--security-groups "launch-wizard-37" \
+		--security-groups "ssh-22" \
 		--instance-type "t2.micro" \
 		--block-device-mappings "DeviceName=/dev/sda1,Ebs={VolumeSize=8}" \
 		| grep "InstanceId" | sed -E -e 's/\ |.*:|\,//g'
