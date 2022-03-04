@@ -55,7 +55,7 @@
 	$ ./createVanillaUbuntu.sh
 
 
-11.	List IP addresses of online instances:
+11.	(optional) List IP addresses of online instances:
 
 	$ ./listInstancesIPs.sh
 
@@ -65,8 +65,7 @@
 	when you created an empty Ubuntu instances.
 
 
-12.	Open 'remoteInstall.sh' and fill STOCKHOLM_VANILLA_INSTANCE_IP
-	and FRANKFURT_VANILLA_INSTANCE_IP. Install necessary packages and shut down:
+12.	Install necessary packages and shut down:
 
 	$ ./remoteInstall.sh
 
