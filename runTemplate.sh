@@ -17,8 +17,4 @@ function runTemplate(){
 		| grep "InstanceId" | sed -E -e 's/\ |.*:|\,//g'
 }
 
-if ./checkAWS.sh; then
-	main
-else
-	echo "AWS CLI not found, check https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html"
-fi
+./checkAWS.sh && main || ./awsCliNa.sh

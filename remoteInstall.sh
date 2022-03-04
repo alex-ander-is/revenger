@@ -16,8 +16,4 @@ function install(){
 	ssh -i "${1}" -o "StrictHostKeyChecking no" "ubuntu@${2}" ./install.sh
 }
 
-if ./checkAWS.sh; then
-	main
-else
-	echo "AWS CLI not found, check https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html"
-fi
+./checkAWS.sh && main || ./awsCliNa.sh
