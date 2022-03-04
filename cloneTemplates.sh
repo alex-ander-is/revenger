@@ -12,6 +12,12 @@ FRANKFURT_INSTANCE_TYPE="t2.micro"
 STOCKHOLM_SECURITY_GROUPS="launch-wizard-22"
 FRANKFURT_SECURITY_GROUPS="launch-wizard-37"
 
+
+# https://docs.aws.amazon.com/cli/latest/reference/ec2/run-instances.html
+# To ensure faster instance launches, break up large requests into smaller
+# batches. For example, create five separate launch requests for 100 instances
+# each instead of one launch request for 500 instances.
+
 main(){
 	echo "Stockholm:"
 	for i in $(seq 1 ${@})

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Fill IP addresses of vanilla instances
-# by run ./listVanillasIPs.sh
+# by run ./listInstancesIPs.sh
 STOCKHOLM_VANILLA_INSTANCE_IP=""
 FRANKFURT_VANILLA_INSTANCE_IP=""
 

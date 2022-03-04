@@ -8,7 +8,7 @@ main(){
 function list(){
 	aws ec2 describe-instances \
 		--region ${1} \
-		--query "Reservations[*].Instances[*].PublicIpAddress" \
+		--query "Reservations[*].Instances[*].{heroiam:InstanceId,slava:PublicIpAddress}" \
 		--output=text
 }
 
