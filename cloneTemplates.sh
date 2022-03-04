@@ -1,17 +1,13 @@
 #!/bin/bash
 
-# Fill Vanilla Ubuntu Instance IDs:
 STOCKHOLM_TEMPLATE_IMAGE="ami-"
 FRANKFURT_TEMPLATE_IMAGE="ami-"
+# Fill Vanilla Ubuntu Instance IDs
+# obtained during ./createImages.sh
 
 # Don't touch if you don't know what are you doing
 STOCKHOLM_INSTANCE_TYPE="t3.micro"
 FRANKFURT_INSTANCE_TYPE="t2.micro"
-
-# Verify Security Groups Names
-STOCKHOLM_SECURITY_GROUPS="launch-wizard-22"
-FRANKFURT_SECURITY_GROUPS="launch-wizard-37"
-
 
 # https://docs.aws.amazon.com/cli/latest/reference/ec2/run-instances.html
 # To ensure faster instance launches, break up large requests into smaller
