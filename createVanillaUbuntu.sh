@@ -5,8 +5,13 @@ STOCKHOLM_VANILLA_IMAGE_UBUNTU="ami-092cce4a19b438926"
 FRANKFURT_VANILLA_IMAGE_UBUNTU="ami-0d527b8c289b4af7f"
 
 main(){
-	echo -n "Stockholm: Vanilla Ubuntu Instance ID: " && createStockholm
-	echo -n "Frankfurt: Vanilla Ubuntu Instance ID: " && createFrankfurt
+	STOCKHOLM_VANILLA_INSTANCE_ID=`createStockholm`
+	echo "Stockholm: Vanilla Ubuntu Instance ID:" ${STOCKHOLM_VANILLA_INSTANCE_ID}
+	echo "STOCKHOLM_VANILLA_INSTANCE_ID="""${STOCKHOLM_VANILLA_INSTANCE_ID}"" > vanilla_ids.source
+
+	FRANKFURT_VANILLA_INSTANCE_ID=`createFrankfurt`
+	echo "Frankfurt: Vanilla Ubuntu Instance ID:" ${FRANKFURT_VANILLA_INSTANCE_ID}
+	echo "FRANKFURT_VANILLA_INSTANCE_ID="""${FRANKFURT_VANILLA_INSTANCE_ID}"" >> vanilla_ids.source
 }
 
 function createStockholm(){

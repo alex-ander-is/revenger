@@ -71,8 +71,7 @@
 	when you created an empty Ubuntu instances.
 
 
-13.	Open 'remoteInstall.sh' and fill STOCKHOLM_VANILLA_INSTANCE_IP
-	and FRANKFURT_VANILLA_INSTANCE_IP. Install necessary packages and shut down:
+13.	Install necessary packages and shut down:
 
 	$ ./remoteInstall.sh
 
