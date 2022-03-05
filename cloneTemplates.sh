@@ -1,9 +1,8 @@
 #!/bin/bash
 
-STOCKHOLM_TEMPLATE_IMAGE="ami-"
-FRANKFURT_TEMPLATE_IMAGE="ami-"
 # Fill Vanilla Ubuntu Instance IDs
 # obtained during ./createImages.sh
+source image_ids.source
 
 # https://docs.aws.amazon.com/cli/latest/reference/ec2/run-instances.html
 # To ensure faster instance launches, break up large requests into smaller
