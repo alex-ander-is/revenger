@@ -2,7 +2,7 @@
 
 # Fill IDs of vanilla instances
 # obtained during ./createVanillaUbuntu.sh
-source vanilla_ids.source
+source VANILLA_IDS.txt
 
 main(){
 	STOCKHOLM_TEMPLATE_IMAGE=`createImage "eu-north-1" ${STOCKHOLM_VANILLA_INSTANCE_ID} "template.t3.micro-0"`

@@ -1,4 +1,5 @@
 #!/bin/bash
+# Creates Security Group for SSH access via port 22
 
 main(){
 	echo -n 'Stockholm: Security Group "ssh-22" ID: ' && createSecurityGroup "eu-north-1"

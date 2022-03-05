@@ -20,7 +20,7 @@ function cloneStockholm(){
 		process \
 			${STOCKHOLM_TEMPLATE_IMAGE} \
 			"eu-north-1" \
-			"key-stockholm-1" \
+			"key-stockholm-0" \
 			"t3.micro" &
 	done
 }
@@ -31,7 +31,7 @@ function cloneFrankfurt(){
 		process \
 			${FRANKFURT_TEMPLATE_IMAGE} \
 			"eu-central-1" \
-			"key-frankfurt-1" \
+			"key-frankfurt-0" \
 			"t2.micro" &
 	done
 }

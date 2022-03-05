@@ -2,7 +2,7 @@
 
 # Fill IDs of vanilla instances
 # obtained during ./createVanillaUbuntu.sh
-source vanilla_ids.source
+source VANILLA_IDS.txt
 
 main(){
 	runTemplate "eu-north-1" ${STOCKHOLM_VANILLA_INSTANCE_ID}

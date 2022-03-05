@@ -6,9 +6,9 @@ function main(){
 	local COLOR_YELLOW=$'\e[1;33m'
 	local RESET_COLOR=$'\e[0m'
 
-	echo -e "${COLOR_RED}--- AWS CLI is not found! ---${RESET_COLOR}"
-	echo "${COLOR_YELLOW}Please follow the link for installation instructions:${RESET_COLOR}"
-	echo "${COLOR_GREEN}https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html${RESET_COLOR}"
+	echo -e "${COLOR_RED}[ ERROR ]${RESET_COLOR} AWS CLI was not found!"
+	echo -e "${COLOR_YELLOW}Please follow the link for installation instructions:${RESET_COLOR}"
+	echo -e "${COLOR_GREEN}https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html${RESET_COLOR}"
 }
 
 main

@@ -1,19 +1,23 @@
 #!/bin/bash
+# Installs necessary packages, docker image and shut down the instance.
 
-source vanilla_ids.source
+# Load values of
+# STOCKHOLM_VANILLA_INSTANCE_ID & FRANKFURT_VANILLA_INSTANCE_ID
+source VANILLA_IDS.txt
 
 function main(){
-	STOCKHOLM_VANILLA_INSTANCE_IP=`get_instance_ip "eu-north-1" ${STOCKHOLM_VANILLA_INSTANCE_ID}`
-	FRANKFURT_VANILLA_INSTANCE_IP=`get_instance_ip "eu-central-1" ${FRANKFURT_VANILLA_INSTANCE_ID}`
+	STOCKHOLM_VANILLA_INSTANCE_IP=`getInstanceIP "eu-north-1" ${STOCKHOLM_VANILLA_INSTANCE_ID}`
 
-	echo "Stockholm IP:" ${STOCKHOLM_VANILLA_INSTANCE_IP}
-	echo "Frankfurt IP:" ${FRANKFURT_VANILLA_INSTANCE_IP}
+	echo "Stockholm IP: " ${STOCKHOLM_VANILLA_INSTANCE_IP}
 
-	install "key-stockholm-1.pem" ${STOCKHOLM_VANILLA_INSTANCE_IP}
-	install "key-frankfurt-1.pem" ${FRANKFURT_VANILLA_INSTANCE_IP}
+	FRANKFURT_VANILLA_INSTANCE_IP=`getInstanceIP "eu-central-1" ${FRANKFURT_VANILLA_INSTANCE_ID}`
+	echo "Frankfurt IP: " ${FRANKFURT_VANILLA_INSTANCE_IP}
+
+	install "key-stockholm-0.pem" ${STOCKHOLM_VANILLA_INSTANCE_IP}
+	install "key-frankfurt-0.pem" ${FRANKFURT_VANILLA_INSTANCE_IP}
 }
 
-function get_instance_ip(){
+function getInstanceIP(){
 	aws ec2 describe-instances \
 		--region ${1} \
 		--instance-ids ${2} \
