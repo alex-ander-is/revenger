@@ -105,8 +105,8 @@
 
 	$ ./listInstancesIPs.sh
 
-	Fill the list of IP addresses to the 'fire.sh', see the script for details.
-
+	(optional) Fill the list of IP addresses to the 'fire.sh', see the script for details. Or skip this if you want fire on all your instances.
+	
 
 18.	Make the fire (for an hour) to the website defined as parameter
 
