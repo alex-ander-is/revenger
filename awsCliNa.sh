@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function main(){
+main(){
 	local COLOR_RED=$'\e[1;31m'
 	local COLOR_GREEN=$'\e[1;32m'
 	local COLOR_YELLOW=$'\e[1;33m'

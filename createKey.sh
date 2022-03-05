@@ -5,13 +5,13 @@ main(){
 	createKey
 }
 
-function createKey(){
+createKey(){
 	createKeyStockholm
 	createKeyFrankfurt
 	chmod 600 *.pem
 }
 
-function createKeyStockholm(){
+createKeyStockholm(){
 	if ! aws ec2 create-key-pair \
 		--region "eu-north-1" \
 		--key-name "key-stockholm-0" \
@@ -21,7 +21,7 @@ function createKeyStockholm(){
 	then exit 1; fi
 }
 
-function createKeyFrankfurt(){
+createKeyFrankfurt(){
 	if ! aws ec2 create-key-pair \
 		--region "eu-central-1" \
 		--key-name "key-frankfurt-0" \

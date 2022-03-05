@@ -1,17 +1,17 @@
 #!/bin/bash
+# Creates images for the further usage with no necessity to install packages
+# and docker again.
 
-# Fill IDs of vanilla instances
-# obtained during ./createVanillaUbuntu.sh
 source VANILLA_IDS.txt
 
 main(){
 	STOCKHOLM_TEMPLATE_IMAGE=`createImage "eu-north-1" ${STOCKHOLM_VANILLA_INSTANCE_ID} "template.t3.micro-0"`
 	echo "Stockholm template image ID:" ${STOCKHOLM_TEMPLATE_IMAGE}
-	echo "STOCKHOLM_TEMPLATE_IMAGE="""${STOCKHOLM_TEMPLATE_IMAGE}"" > image_ids.source
+	echo "STOCKHOLM_TEMPLATE_IMAGE="""${STOCKHOLM_TEMPLATE_IMAGE}"" > IMAGE_IDS.txt
 
 	FRANKFURT_TEMPLATE_IMAGE=`createImage "eu-central-1" ${FRANKFURT_VANILLA_INSTANCE_ID} "template.t2.micro-0"`
 	echo "Frankfurt template image ID:" ${FRANKFURT_TEMPLATE_IMAGE}
-	echo "FRANKFURT_TEMPLATE_IMAGE="""${FRANKFURT_TEMPLATE_IMAGE}"" >> image_ids.source
+	echo "FRANKFURT_TEMPLATE_IMAGE="""${FRANKFURT_TEMPLATE_IMAGE}"" >> IMAGE_IDS.txt
 }
 
 createImage(){

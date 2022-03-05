@@ -9,15 +9,19 @@ FRANKFURT_VANILLA_IMAGE_UBUNTU="ami-0d527b8c289b4af7f"
 
 main(){
 	STOCKHOLM_VANILLA_INSTANCE_ID=`createInstanceStockholm`
+	[[ -z "$STOCKHOLM_VANILLA_INSTANCE_ID" ]] && exit 1
+
 	echo "Stockholm: Vanilla Ubuntu Instance ID:" ${STOCKHOLM_VANILLA_INSTANCE_ID}
 	echo "STOCKHOLM_VANILLA_INSTANCE_ID="""${STOCKHOLM_VANILLA_INSTANCE_ID}"" > VANILLA_IDS.txt
 
 	FRANKFURT_VANILLA_INSTANCE_ID=`createInstanceFrankfurt`
+	[[ -z "$FRANKFURT_VANILLA_INSTANCE_ID" ]] && exit 1
+
 	echo "Frankfurt: Vanilla Ubuntu Instance ID:" ${FRANKFURT_VANILLA_INSTANCE_ID}
 	echo "FRANKFURT_VANILLA_INSTANCE_ID="""${FRANKFURT_VANILLA_INSTANCE_ID}"" >> VANILLA_IDS.txt
 }
 
-function createInstanceStockholm(){
+createInstanceStockholm(){
 	aws ec2 run-instances \
 		--image-id "${STOCKHOLM_VANILLA_IMAGE_UBUNTU}" \
 		--region "eu-north-1" \
@@ -28,7 +32,7 @@ function createInstanceStockholm(){
 		| grep "InstanceId" | sed -E -e 's/\ |.*:|\,//g'
 }
 
-function createInstanceFrankfurt(){
+createInstanceFrankfurt(){
 	aws ec2 run-instances \
 		--image-id "${FRANKFURT_VANILLA_IMAGE_UBUNTU}" \
 		--region "eu-central-1" \
