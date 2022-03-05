@@ -11,7 +11,7 @@ main(){
 
 	if [ -f FRANKFURT_INSTANCES_IPS.txt ]
 	then
-		echo "Frankfurt kill by:"
+		echo "Killing all bombardiers at Frankfurt..."
 		killbombardier "key-frankfurt-1.pem" "$(cat FRANKFURT_INSTANCES_IPS.txt)"
 	fi
 }
