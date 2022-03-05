@@ -5,7 +5,7 @@ main(){
 
 	if [ -f STOCKHOLM_INSTANCES_IPS.txt ]
 	then
-		echo "Stockholm kill by:"
+		echo "Killing all bombardiers at Stockholm..."
 		killbombardier "key-stockholm-1.pem" "$(cat STOCKHOLM_INSTANCES_IPS.txt)"
 	fi
 
