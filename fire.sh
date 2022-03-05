@@ -1,18 +1,19 @@
 #!/bin/bash
 
-# Fill the list of IPs of online AWS instances, e.g.:
-# STOCKHOLM=('1.2.3.4' '5.6.7.8' '9.10.11.12')
-# FRANKFURT=('1.2.3.4' '5.6.7.8' '9.10.11.12')
-
-STOCKHOLM=()
-FRANKFURT=()
-
 main(){
-	echo "Stockholm fires on $1 by:"
-	fire "key-stockholm-1.pem" ${1} "${STOCKHOLM[@]}"
+	./updateInstancesIPs.sh
 
-	echo "Frankfurt fires on $1 by:"
-	fire "key-frankfurt-1.pem" ${1} "${FRANKFURT[@]}"
+	if [ -f STOCKHOLM_INSTANCES_IPS.txt ]
+	then
+		echo "Stockholm fires on $1 by:"
+		fire "key-stockholm-1.pem" "${@}" "$(cat STOCKHOLM_INSTANCES_IPS.txt)"
+	fi
+
+	if [ -f FRANKFURT_INSTANCES_IPS.txt ]
+	then
+		echo "Frankfurt fires on $1 by:"
+		fire "key-frankfurt-1.pem" "${@}" "$(cat FRANKFURT_INSTANCES_IPS.txt)"
+	fi
 }
 
 fire(){
@@ -29,6 +30,7 @@ fire(){
 process(){
 	echo "${3}"
 	ssh \
+		-o LogLevel=ERROR \
 		-i "${1}" \
 		-o "StrictHostKeyChecking no" "ubuntu@${3}" \
 		screen \

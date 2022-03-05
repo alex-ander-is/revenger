@@ -91,23 +91,14 @@
 	$ ./startTemplate.sh
 
 
-16.	Clone images into new "Free tier eligible" instances. The parameter defines
-	the number of new instances.
+16.	Clone images into new "Free tier eligible" instances and run all of them.
+	The parameter defines the number of new instances.
 	Beware of vCPU limit. The default is 64 (32×2 CPU in case of t2/t3.micro)
 	To request more vCPUs, visit http://aws.amazon.com/contact-us/ec2-request
 
 	$ ./cloneTemplates.sh 15
 
 
-17.	List IP addresses of all online instances.
-	Beware, it takes time to bring the instance up.
-	Wait a minute before the collecting of IP addresses.
-
-	$ ./listInstancesIPs.sh
-
-	Fill the list of IP addresses to the 'fire.sh', see the script for details.
-
-
-18.	Make the fire (for an hour) to the website defined as parameter
+17.	Make the fire (for an hour) to the website defined as parameter
 
 	$ ./fire.sh https://tass.ru/
