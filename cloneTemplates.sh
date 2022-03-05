@@ -10,8 +10,8 @@ source IMAGE_IDS.txt
 # each instead of one launch request for 500 instances.
 
 main(){
-	cloneStockholm &
-	cloneFrankfurt &
+	cloneStockholm ${@} &
+	cloneFrankfurt ${@} &
 }
 
 cloneStockholm(){
