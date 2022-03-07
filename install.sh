@@ -14,8 +14,6 @@ main(){
 	./createSecurityGroup.sh &&
 	./createVanillaUbuntu.sh &&
 	./watchForInstancesStart.sh &&
-	# Ugly workaround as even already running instance shouldn't have ssh ready
-	sleep 10 &&
 	./remoteInstall.sh &&
 	./watchForInstancesStop.sh &&
 	./createImages.sh &&
