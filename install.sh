@@ -1,11 +1,28 @@
 #!/bin/bash
 
-sudo apt-get -y update &&
-sudo apt-get -y install apt-transport-https ca-certificates curl software-properties-common &&
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - &&
-sudo add-apt-repository 'deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable' &&
-sudo apt-get -y update &&
-sudo apt-cache policy docker-ce &&
-sudo apt-get install -y nload screen docker-ce
-sudo docker pull alpine/bombardier
-sudo poweroff
+main(){
+	local COLOR_RED=$'\e[1;31m'
+	local COLOR_GREEN=$'\e[1;32m'
+	local COLOR_YELLOW=$'\e[1;33m'
+	local RESET_COLOR=$'\e[0m'
+
+	# Just in case you have forgotten to do so…
+	chmod +x *.sh
+
+ 	# TODO: Check which steps are already done to avoid duplicates
+	./createKey.sh &&
+	./createSecurityGroup.sh &&
+	./createVanillaUbuntu.sh &&
+	./watchForInstancesStart.sh &&
+	./remoteInstall.sh &&
+	./watchForInstancesStop.sh &&
+	./createImages.sh &&
+	./watchForImagesCreated.sh &&
+	./terminateTemplate.sh &&
+	echo -e "${COLOR_GREEN}[ DONE ]${RESET_COLOR}" &&
+	exit
+
+	echo -e "${COLOR_RED}[ ERROR ]${COLOR_YELLOW} Something wrong happened${RESET_COLOR} (Error Code: ${?})"
+}
+
+./checkAWS.sh && main || ./awsCliNa.sh

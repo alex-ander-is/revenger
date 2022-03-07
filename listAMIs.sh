@@ -5,7 +5,7 @@ main(){
 	echo "Frankfurt AMIs" && list "eu-central-1"
 }
 
-function list(){
+list(){
 	aws ec2 describe-images \
 		--owners "self" \
 		--region ${1} \

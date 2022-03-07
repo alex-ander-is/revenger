@@ -45,52 +45,11 @@
 	The rest remains empty.
 
 
-9.	Create and download key pairs.
-	They will be saved as 'key-frankfurt-1.pem' and 'key-stockholm-1.pem':
-
-	$ ./createKey.sh
+9.	Run the installation.
+	$ ./install.sh
 
 
-10.	Create Security Group for SSH access via port 22
-
-	$ ./createSecurityGroup.sh
-
-
-11.	Create empty Ubuntu instances, they will be used as template images:
-
-	$ ./createVanillaUbuntu.sh
-
-
-12.	List IP addresses of online instances:
-
-	$ ./listInstancesIPs.sh
-
-	At this point there should be only two empty instances.
-	If you have more instances created already, search for IPs by Instance ID,
-	which is the first column. Instance IDs are printed at the previous step
-	when you created an empty Ubuntu instances.
-
-
-13.	Install necessary packages and shut down:
-
-	$ ./remoteInstall.sh
-
-
-14.	Create an image for the further usage:
-
-	$ ./createImages.sh
-
-	! Wait until it's ready. You can monitor the state for:
-	Stockholm: https://eu-north-1.console.aws.amazon.com/ec2/v2/home?region=eu-north-1#Images:sort=name
-	Frankfurt: https://eu-central-1.console.aws.amazon.com/ec2/v2/home?region=eu-central-1#Images:sort=name
-
-
-15.	Start the instance agan (if needed):
-
-	$ ./startTemplate.sh
-
-
-16.	Clone images into new "Free tier eligible" instances and run all of them.
+10.	Clone images into new "Free tier eligible" instances and run all of them.
 	The parameter defines the number of new instances.
 	Beware of vCPU limit. The default is 64 (32×2 CPU in case of t2/t3.micro)
 	To request more vCPUs, visit http://aws.amazon.com/contact-us/ec2-request
@@ -98,6 +57,6 @@
 	$ ./cloneTemplates.sh 15
 
 
-17.	Make the fire (for an hour) to the website defined as parameter
+11.	Make the fire (for an hour) to the target defined as parameter
 
 	$ ./fire.sh https://tass.ru/

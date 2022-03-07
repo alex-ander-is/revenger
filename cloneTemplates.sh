@@ -2,7 +2,7 @@
 
 # Fill Vanilla Ubuntu Instance IDs
 # obtained during ./createImages.sh
-source image_ids.source
+source IMAGE_IDS.txt
 
 # https://docs.aws.amazon.com/cli/latest/reference/ec2/run-instances.html
 # To ensure faster instance launches, break up large requests into smaller
@@ -10,33 +10,33 @@ source image_ids.source
 # each instead of one launch request for 500 instances.
 
 main(){
-	cloneStockholm &
-	cloneFrankfurt &
+	cloneStockholm ${@} &
+	cloneFrankfurt ${@} &
 }
 
-function cloneStockholm(){
+cloneStockholm(){
 	for i in $(seq 1 ${@})
 	do
 		process \
 			${STOCKHOLM_TEMPLATE_IMAGE} \
 			"eu-north-1" \
-			"key-stockholm-1" \
+			"key-stockholm-0" \
 			"t3.micro" &
 	done
 }
 
-function cloneFrankfurt(){
+cloneFrankfurt(){
 	for i in $(seq 1 ${@})
 	do
 		process \
 			${FRANKFURT_TEMPLATE_IMAGE} \
 			"eu-central-1" \
-			"key-frankfurt-1" \
+			"key-frankfurt-0" \
 			"t2.micro" &
 	done
 }
 
-function process(){
+process(){
 	aws ec2 run-instances \
 		--image-id "${1}" \
 		--region "${2}" \
