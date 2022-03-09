@@ -12,7 +12,16 @@ main(){
 	./removeSSHSecurityGroups.sh
 	./listImages.sh
 	./deregisterImages.sh
+	removeIPLists
 	echo -e "${COLOR_GREEN}[ DONE ]${RESET_COLOR}"
+}
+
+removeIPLists(){
+	[[ -f "STOCKHOLM_INSTANCES_IPS.txt" ]] &&
+	rm -f "STOCKHOLM_INSTANCES_IPS.txt"
+
+	[[ -f "FRANKFURT_INSTANCES_IPS.txt" ]] &&
+	rm -f "FRANKFURT_INSTANCES_IPS.txt"
 }
 
 main
