@@ -25,4 +25,4 @@ main(){
 	echo -e "${COLOR_RED}[ ERROR ]${COLOR_YELLOW} Something wrong happened${RESET_COLOR} (Error Code: ${?})"
 }
 
-./checkAWS.sh && main || ./awsCliNa.sh
+main

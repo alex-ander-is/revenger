@@ -3,7 +3,9 @@
 
 # Load values of
 # STOCKHOLM_VANILLA_INSTANCE_ID & FRANKFURT_VANILLA_INSTANCE_ID
-source VANILLA_IDS.txt
+[[ -f "VANILLA_IDS.txt" ]] &&
+source "VANILLA_IDS.txt" ||
+exit 1
 
 main(){
 	STOCKHOLM_VANILLA_INSTANCE_IP=`getInstanceIP "eu-north-1" ${STOCKHOLM_VANILLA_INSTANCE_ID}`

@@ -1,8 +1,8 @@
 #!/bin/bash
 
 main(){
-	echo "Stockholm AMIs" && list "eu-north-1"
-	echo "Frankfurt AMIs" && list "eu-central-1"
+	echo "Stockholm AMI Images: " && list "eu-north-1"
+	echo "Frankfurt AMI Images: " && list "eu-central-1"
 }
 
 list(){

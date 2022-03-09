@@ -2,7 +2,11 @@
 # Creates images for the further usage with no necessity to install packages
 # and docker again.
 
-source VANILLA_IDS.txt
+# Load values of
+# STOCKHOLM_VANILLA_INSTANCE_ID & FRANKFURT_VANILLA_INSTANCE_ID
+[[ -f "VANILLA_IDS.txt" ]] &&
+source "VANILLA_IDS.txt" ||
+exit 1
 
 main(){
 	STOCKHOLM_TEMPLATE_IMAGE=`createImage "eu-north-1" ${STOCKHOLM_VANILLA_INSTANCE_ID} "template.t3.micro-0"`

@@ -3,7 +3,10 @@
 
 # Load values of
 # STOCKHOLM_VANILLA_INSTANCE_ID & FRANKFURT_VANILLA_INSTANCE_ID
-source VANILLA_IDS.txt
+[[ -f "VANILLA_IDS.txt" ]] &&
+source "VANILLA_IDS.txt" ||
+exit 1
+
 TIMEOUT=480 # 8 minues
 CZECH_INTERVAL=2
 
