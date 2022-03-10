@@ -9,8 +9,6 @@ main(){
 }
 
 interrupted(){
-	local COLOR_RED=$'\e[1;31m'
-	local COLOR_GREEN=$'\e[1;32m'
 	local COLOR_YELLOW=$'\e[1;33m'
 	local RESET_COLOR=$'\e[0m'
 

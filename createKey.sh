@@ -17,7 +17,7 @@ createKeyStockholm(){
 		--key-name "key-stockholm-0" \
 		--key-type rsa \
 		--query "KeyMaterial" \
-		--output text > key-stockholm-0.pem
+		--o text > key-stockholm-0.pem
 	then exit 1; fi
 }
 
@@ -27,7 +27,7 @@ createKeyFrankfurt(){
 		--key-name "key-frankfurt-0" \
 		--key-type rsa \
 		--query "KeyMaterial" \
-		--output text > key-frankfurt-0.pem
+		--o text > key-frankfurt-0.pem
 	then exit 1; fi
 }
 

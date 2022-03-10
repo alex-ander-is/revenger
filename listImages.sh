@@ -1,8 +1,15 @@
 #!/bin/bash
 
 main(){
-	echo "Stockholm AMI Images: " && list "eu-north-1"
-	echo "Frankfurt AMI Images: " && list "eu-central-1"
+	STOCKHOLM_IMAGES=`list "eu-north-1"`
+	FRANKFURT_IMAGES=`list "eu-central-1"`
+	[[ ! -z ${STOCKHOLM_IMAGES} ]] &&
+	echo "Stockholm AMI Images: ${STOCKHOLM_IMAGES}"
+
+	[[ ! -z ${FRANKFURT_IMAGES} ]] &&
+	echo "Frankfurt AMI Images: ${FRANKFURT_IMAGES}"
+
+	exit 0
 }
 
 list(){

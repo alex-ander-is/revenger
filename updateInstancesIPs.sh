@@ -12,7 +12,7 @@ updateIPs(){
 		--region ${2} \
 		--query "Reservations[*].Instances[*].{a:PublicIpAddress}" \
 		--filters "Name=instance-state-code,Values=16" \
-		--output=text > ${1}
+		--o text > ${1}
 }
 
 ./checkAWS.sh && main || ./awsCliNa.sh

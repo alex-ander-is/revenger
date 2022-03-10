@@ -6,13 +6,13 @@ main(){
 	if [ -f STOCKHOLM_INSTANCES_IPS.txt ]
 	then
 		echo "Stockholm fires on $1 by:"
-		fire "key-stockholm-0.pem" "${@}" "$(cat STOCKHOLM_INSTANCES_IPS.txt)"
+		fire "key-stockholm-0.pem" ${@} $(cat STOCKHOLM_INSTANCES_IPS.txt)
 	fi
 
 	if [ -f FRANKFURT_INSTANCES_IPS.txt ]
 	then
 		echo "Frankfurt fires on $1 by:"
-		fire "key-frankfurt-0.pem" "${@}" "$(cat FRANKFURT_INSTANCES_IPS.txt)"
+		fire "key-frankfurt-0.pem" ${@} $(cat FRANKFURT_INSTANCES_IPS.txt)
 	fi
 }
 
@@ -28,10 +28,10 @@ fire(){
 }
 
 process(){
-	echo "${3}"
+	echo ${3}
 	ssh \
 		-o LogLevel=ERROR \
-		-i "${1}" \
+		-i ${1} \
 		-o "StrictHostKeyChecking no" "ubuntu@${3}" \
 		screen \
 			-dm sudo docker run \

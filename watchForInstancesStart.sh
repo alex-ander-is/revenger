@@ -58,8 +58,8 @@ czechInstancesState(){
 }
 
 czechSSHState(){
-	nc -z $STOCKHOLM_VANILLA_INSTANCE_IP 22 && \
-	nc -z $FRANKFURT_VANILLA_INSTANCE_IP 22 && \
+	nc -z $STOCKHOLM_VANILLA_INSTANCE_IP 22 &> /dev/null && \
+	nc -z $FRANKFURT_VANILLA_INSTANCE_IP 22 &> /dev/null && \
 	exit 0
 }
 
@@ -67,10 +67,10 @@ instanceReady(){
 	WATCHER_STATE=${WAITING_FOR_SSH}
 
 	STOCKHOLM_VANILLA_INSTANCE_IP=`getInstanceIP "eu-north-1" ${STOCKHOLM_VANILLA_INSTANCE_ID}`
-	[[ -z "$STOCKHOLM_VANILLA_INSTANCE_IP" ]] && exit 1
+	[[ -z ${STOCKHOLM_VANILLA_INSTANCE_IP} ]] && exit 1
 
 	FRANKFURT_VANILLA_INSTANCE_IP=`getInstanceIP "eu-central-1" ${FRANKFURT_VANILLA_INSTANCE_ID}`
-	[[ -z "$FRANKFURT_VANILLA_INSTANCE_IP" ]] && exit 1
+	[[ -z ${FRANKFURT_VANILLA_INSTANCE_IP} ]] && exit 1
 
 	watchSSHState
 }
@@ -81,7 +81,7 @@ getInstanceIP(){
 		--instance-ids ${2} \
 		--query "Reservations[*].Instances[*].{HeroiamSlava:PublicIpAddress}" \
 		--filters "Name=instance-state-code,Values=16" \
-		--output=text
+		--o text
 }
 
 ./checkAWS.sh && main || ./awsCliNa.sh

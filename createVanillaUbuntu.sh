@@ -8,37 +8,27 @@ STOCKHOLM_VANILLA_IMAGE_UBUNTU="ami-092cce4a19b438926"
 FRANKFURT_VANILLA_IMAGE_UBUNTU="ami-0d527b8c289b4af7f"
 
 main(){
-	STOCKHOLM_VANILLA_INSTANCE_ID=`createInstanceStockholm`
-	[[ -z "$STOCKHOLM_VANILLA_INSTANCE_ID" ]] && exit 1
+	STOCKHOLM_VANILLA_INSTANCE_ID=`createInstance ${STOCKHOLM_VANILLA_IMAGE_UBUNTU} "eu-north-1" "key-stockholm-0" "t3.micro"`
+	[[ -z ${STOCKHOLM_VANILLA_INSTANCE_ID} ]] && exit 1
 
-	echo "Stockholm: Vanilla Ubuntu Instance ID:" ${STOCKHOLM_VANILLA_INSTANCE_ID}
-	echo "STOCKHOLM_VANILLA_INSTANCE_ID="""${STOCKHOLM_VANILLA_INSTANCE_ID}"" > VANILLA_IDS.txt
+	echo "Stockholm: Vanilla Ubuntu Instance ID: ${STOCKHOLM_VANILLA_INSTANCE_ID}"
+	echo "STOCKHOLM_VANILLA_INSTANCE_ID=""${STOCKHOLM_VANILLA_INSTANCE_ID}" > VANILLA_IDS.txt
 
-	FRANKFURT_VANILLA_INSTANCE_ID=`createInstanceFrankfurt`
-	[[ -z "$FRANKFURT_VANILLA_INSTANCE_ID" ]] && exit 1
+	FRANKFURT_VANILLA_INSTANCE_ID=`createInstance ${FRANKFURT_VANILLA_IMAGE_UBUNTU} "eu-central-1" "key-frankfurt-0" "t2.micro"`
+	[[ -z ${FRANKFURT_VANILLA_INSTANCE_ID} ]] && exit 1
 
-	echo "Frankfurt: Vanilla Ubuntu Instance ID:" ${FRANKFURT_VANILLA_INSTANCE_ID}
-	echo "FRANKFURT_VANILLA_INSTANCE_ID="""${FRANKFURT_VANILLA_INSTANCE_ID}"" >> VANILLA_IDS.txt
+	echo "Frankfurt: Vanilla Ubuntu Instance ID: ${FRANKFURT_VANILLA_INSTANCE_ID}"
+	echo "FRANKFURT_VANILLA_INSTANCE_ID=""${FRANKFURT_VANILLA_INSTANCE_ID}" >> VANILLA_IDS.txt
 }
 
-createInstanceStockholm(){
-	aws ec2 run-instances \
-		--image-id "${STOCKHOLM_VANILLA_IMAGE_UBUNTU}" \
-		--region "eu-north-1" \
-		--key-name "key-stockholm-0" \
-		--security-groups "ssh-22" \
-		--instance-type "t3.micro" \
-		--block-device-mappings "DeviceName=/dev/sda1,Ebs={VolumeSize=8}" \
-		| grep "InstanceId" | sed -E -e 's/\ |.*:|\,//g'
-}
 
-createInstanceFrankfurt(){
+createInstance(){
 	aws ec2 run-instances \
-		--image-id "${FRANKFURT_VANILLA_IMAGE_UBUNTU}" \
-		--region "eu-central-1" \
-		--key-name "key-frankfurt-0" \
+		--image-id ${1} \
+		--region ${2} \
+		--key-name ${3} \
 		--security-groups "ssh-22" \
-		--instance-type "t2.micro" \
+		--instance-type ${4} \
 		--block-device-mappings "DeviceName=/dev/sda1,Ebs={VolumeSize=8}" \
 		| grep "InstanceId" | sed -E -e 's/\ |.*:|\,//g'
 }
