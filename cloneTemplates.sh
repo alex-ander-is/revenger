@@ -13,7 +13,8 @@ source ${IMAGE_IDS_FILE}
 
 main(){
 	cloneStockholm ${@} &
-	cloneFrankfurt ${@}
+	cloneFrankfurt ${@} &
+	wait
 }
 
 cloneStockholm(){

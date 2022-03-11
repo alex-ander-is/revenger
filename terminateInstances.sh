@@ -8,7 +8,8 @@ main(){
 	FRANKFURT_INSTANCES_IDS=`getInstances "eu-central-1"`
 
 	[[ -z ${STOCKHOLM_INSTANCES_IDS} ]] || terminate "eu-north-1" ${STOCKHOLM_INSTANCES_IDS} &
-	[[ -z ${FRANKFURT_INSTANCES_IDS} ]] || terminate "eu-central-1" ${FRANKFURT_INSTANCES_IDS}
+	[[ -z ${FRANKFURT_INSTANCES_IDS} ]] || terminate "eu-central-1" ${FRANKFURT_INSTANCES_IDS} &
+	wait
 }
 
 getInstances(){
