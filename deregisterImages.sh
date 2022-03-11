@@ -17,6 +17,7 @@ main(){
 	aws ec2 deregister-image --region "eu-north-1" --image-id ${STOCKHOLM_TEMPLATE_IMAGE} &&
 	aws ec2 deregister-image --region "eu-central-1" --image-id ${FRANKFURT_TEMPLATE_IMAGE} &&
 
+	# proceeed if there is no images on EC2 anymore
 	rm -f ${IMAGE_IDS_FILE} ||
 
 	interrupted

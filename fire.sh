@@ -28,7 +28,7 @@ fire(){
 }
 
 process(){
-	echo ${3}
+	echo "    ${3}"
 	ssh \
 		-o LogLevel=ERROR \
 		-i ${1} \
