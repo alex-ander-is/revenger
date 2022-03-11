@@ -12,7 +12,7 @@ source ${IMAGE_IDS_FILE}
 # each instead of one launch request for 500 instances.
 
 main(){
-	cloneStockholm ${@}
+	cloneStockholm ${@} &
 	cloneFrankfurt ${@}
 }
 
