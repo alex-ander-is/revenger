@@ -14,6 +14,7 @@ main(){
 		echo "Frankfurt fires on $1 by:"
 		fire "key-frankfurt-0.pem" ${@} $(cat FRANKFURT_INSTANCES_IPS.txt)
 	fi
+	wait
 }
 
 fire(){
