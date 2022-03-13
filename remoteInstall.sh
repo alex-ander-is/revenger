@@ -20,6 +20,7 @@ main(){
 	# TODO: Prevent the action in case there is more than one IP returned.
 	install "key-stockholm-0.pem" ${STOCKHOLM_VANILLA_INSTANCE_IP} &
 	install "key-frankfurt-0.pem" ${FRANKFURT_VANILLA_INSTANCE_IP}
+	wait
 }
 
 getInstanceIP(){

