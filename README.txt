@@ -51,12 +51,20 @@
 
 10.	Clone images into new "Free tier eligible" instances and run all of them.
 	The parameter defines the number of new instances.
-	Beware of vCPU limit. The default is 64 (32×2 CPU in case of t2/t3.micro)
-	To request more vCPUs, visit http://aws.amazon.com/contact-us/ec2-request
-
 	$ ./cloneTemplates.sh 15
 
 
-11.	Make the fire (for an hour) to the target defined as parameter
+11.	Make the fire to targets defined as parameter
+	$ ./fire.sh https://tass.ru/ http://www.tinkoff.ru/ https://www.tinkoff.ru/
 
-	$ ./fire.sh https://tass.ru/
+
+##	To stop the fire (kill and remove docker instances), use
+	$ ./killAll.sh
+
+
+##	To remove all AWS instances, use
+	$ ./terminateInstances.sh
+
+
+##	To remove everything incl. instances, AMI images, Security groups and Key Pairs, use
+	$ ./wipe.sh
