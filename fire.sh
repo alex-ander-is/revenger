@@ -30,7 +30,7 @@ fire(){
 		break
 	done
 
-	echo "${IP}"
+	echo "    fires from ${IP}"
 
 	[[ -z ${CONFIG_URL} ]] &&
 	ssh \
