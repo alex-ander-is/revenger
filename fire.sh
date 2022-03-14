@@ -35,7 +35,7 @@ fire(){
 	[[ -z ${CONFIG_URL} ]] &&
 	ssh \
 		-i ${KEY} \
-		-o LogLevel=ERROR \
+		-o "LogLevel ERROR" \
 		-o "IdentitiesOnly yes" \
 		-o "StrictHostKeyChecking no" \
 		-o "UserKnownHostsFile /dev/null" \
@@ -50,7 +50,7 @@ fire(){
 					${@} ||
 	ssh \
 		-i ${KEY} \
-		-o LogLevel=ERROR \
+		-o "LogLevel ERROR" \
 		-o "IdentitiesOnly yes" \
 		-o "StrictHostKeyChecking no" \
 		-o "UserKnownHostsFile /dev/null" \
