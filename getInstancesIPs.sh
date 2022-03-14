@@ -6,8 +6,8 @@ FRANKFURT_INSTANCES_IPS_FILE="FRANKFURT_INSTANCES_IPS.txt"
 
 main(){
 	[[ ${#} < 1 ]] &&
-	echo -e "Stockholm:\n\n`listStockholm`\n" &&
-	echo -e "Frankfurt:\n\n`listFrankfurt`\n" &&
+	echo -e "Stockholm:\n`listStockholm`\n" &&
+	echo -e "Frankfurt:\n`listFrankfurt`\n" &&
 	exit 0
 
 	for p in ${@}
@@ -33,14 +33,14 @@ listFrankfurt(){
 
 listIPs(){
 	touch ${1}
-	local list=`aws ec2 describe-instances \
+	local LIST=`aws ec2 describe-instances \
 		--region ${2} \
 		--query "Reservations[*].Instances[*].{a:PublicIpAddress}" \
 		--filters "Name=instance-state-code,Values=16" \
 		--o text`
-	echo $list > ${1}
+	echo $LIST > ${1}
 
-	echo "${list}"
+	[[ -z ${LIST} ]] && echo "    There are no IPs" || echo "${LIST}"
 }
 
 help(){
