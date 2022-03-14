@@ -37,6 +37,7 @@ fire(){
 		-o LogLevel=ERROR \
 		-i ${KEY} \
 		-o "StrictHostKeyChecking no" \
+		-o "UserKnownHostsFile /dev/null" \
 		"ubuntu@${IP}" \
 			screen -dm \
 				sudo docker run \
@@ -50,6 +51,7 @@ fire(){
 		-o LogLevel=ERROR \
 		-i ${KEY} \
 		-o "StrictHostKeyChecking no" \
+		-o "UserKnownHostsFile /dev/null" \
 		"ubuntu@${IP}" \
 			screen -dm \
 				sudo docker run \
