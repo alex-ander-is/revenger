@@ -14,6 +14,7 @@ main(){
 	./createSecurityGroup.sh &&
 	./createVanillaUbuntu.sh &&
 	./watchForInstancesStart.sh &&
+	./watchForSSHStart.sh &&
 	./remoteInstall.sh &&
 	./watchForInstancesStop.sh &&
 	./createImages.sh &&

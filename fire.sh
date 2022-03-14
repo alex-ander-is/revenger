@@ -1,6 +1,10 @@
 #!/bin/bash
 
 main(){
+	echo "Fire via alpine/bombardier"
+	./watchForInstancesStart.sh &&
+	./watchForSSHStart.sh || exit 1
+
 	fireFromStockholm ${@} &
 	fireFromFrankfurt ${@}
 	wait
@@ -11,7 +15,7 @@ fireFromStockholm(){
 
 	for ip in ${STOCKHOLM_INSTANCES_IPS}
 	do
-		fireViaBombardier "key-stockholm-0.pem" ${ip} ${@}
+		fireViaBombardier "key-stockholm-0.pem" ${ip} ${@} &
 	done
 }
 
@@ -20,7 +24,7 @@ fireFromFrankfurt(){
 
 	for ip in ${FRANKFURT_INSTANCES_IPS}
 	do
-		fireViaBombardier "key-frankfurt-0.pem" ${ip} ${@}
+		fireViaBombardier "key-frankfurt-0.pem" ${ip} ${@} &
 	done
 }
 
@@ -29,11 +33,9 @@ fireViaBombardier(){
 	local IP=${2}
 	shift 2
 
-	echo "    Fires via alpine/bombardier from ${IP}"
-
 	for target in ${@}
 	do
-		echo "        on target ${target}"
+		echo "    from ${IP} on ${target}"
 		ssh \
 			-i ${KEY} \
 			-o "LogLevel ERROR" \
