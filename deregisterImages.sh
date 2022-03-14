@@ -24,10 +24,14 @@ main(){
 }
 
 interrupted(){
+	local COLOR_RED=$'\e[1;31m'
 	local COLOR_YELLOW=$'\e[1;33m'
 	local RESET_COLOR=$'\e[0m'
 
 	echo -e "${COLOR_YELLOW}The removing of AMI images was not succesfull.${RESET_COLOR}"
+
+	[[ -f ${IMAGE_IDS_FILE} ]] &&
+	echo -e "${COLOR_RED}Don't forget to remove ${IMAGE_IDS_FILE} file once the issue is resolved.${RESET_COLOR}"
 	exit 0
 }
 
