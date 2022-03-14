@@ -57,9 +57,6 @@
 11.	Make the fire to the list of targets defined as parameter, e.g.:
 	$ ./fire.sh https://tass.ru/ http://www.tinkoff.ru/ https://www.tinkoff.ru/
 
-	or to use config (note the -c flag) with a list of targets, e.g.:
-	$ ./fire.sh -c https://pastebin.com/raw/PA2v2zEe
-
 
 ##	To stop the fire (kill and remove docker instances), use
 	$ ./killAll.sh
