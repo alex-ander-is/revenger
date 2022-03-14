@@ -34,8 +34,8 @@ fire(){
 
 	[[ -z ${CONFIG_URL} ]] &&
 	ssh \
-		-o LogLevel=ERROR \
 		-i ${KEY} \
+		-o LogLevel=ERROR \
 		-o "StrictHostKeyChecking no" \
 		-o "UserKnownHostsFile /dev/null" \
 		"ubuntu@${IP}" \
@@ -48,8 +48,8 @@ fire(){
 					-t 2000 \
 					${@} ||
 	ssh \
-		-o LogLevel=ERROR \
 		-i ${KEY} \
+		-o LogLevel=ERROR \
 		-o "StrictHostKeyChecking no" \
 		-o "UserKnownHostsFile /dev/null" \
 		"ubuntu@${IP}" \

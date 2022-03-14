@@ -28,8 +28,8 @@ kill(){
 
 sshCommand(){
 	ssh \
-		-o LogLevel=ERROR \
 		-i ${1} \
+		-o LogLevel=ERROR \
 		-o "StrictHostKeyChecking no" \
 		-o "UserKnownHostsFile /dev/null" \
 		"ubuntu@${2}" ${3}
