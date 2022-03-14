@@ -9,6 +9,7 @@ main(){
 
  	# TODO: Check which steps are already done to avoid duplicates
  	./terminateInstances.sh
+ 	./watchForInstancesTermination.sh
 	./removeKeyPairs.sh
 	./removeSSHSecurityGroups.sh
 	./listImages.sh
