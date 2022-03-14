@@ -12,6 +12,32 @@ source ${IMAGE_IDS_FILE}
 # each instead of one launch request for 500 instances.
 
 main(){
+	for p in ${@}
+	do
+		[[ ${p} == "-sf" || ${p} == "-fs" ]] &&
+		shift &&
+		cloneBoth ${@} &&
+		exit 0
+
+		[[ ${p} == "-s" || ${p} == "--stockholm" ]] &&
+		shift &&
+		cloneStockholm ${@} &&
+		exit 0
+
+		[[ ${p} == "-f" || ${p} == "--frankfurt" ]] &&
+		shift &&
+		cloneFrankfurt ${@} &&
+		exit 0
+
+		[[ ${p} == "-h" || ${p} == "--help" ]] &&
+		help &&
+		exit 0
+	done
+
+	cloneBoth ${@}
+}
+
+cloneBoth(){
 	cloneStockholm ${@} &
 	cloneFrankfurt ${@} &
 	wait
@@ -65,5 +91,10 @@ interrupted(){
 	echo -e "${COLOR_RED}The clonning of templates in ${COLOR_YELLOW}${1}${COLOR_RED} region was not succesfull.${RESET_COLOR}"
 	exit 1
 }
+
+help(){
+	echo "Usage: ${0} [-s | --stockholm] [-f | --frankfurt] [10]"
+}
+
 
 ./checkAWS.sh && main ${@} || ./awsCliNa.sh
