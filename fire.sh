@@ -1,20 +1,27 @@
 #!/bin/bash
 
 main(){
+	fireFromStockholm ${@} &
+	fireFromFrankfurt ${@}
+	wait
+}
+
+fireFromStockholm(){
 	local STOCKHOLM_INSTANCES_IPS=`./getInstancesIPs.sh -s`
-	local FRANKFURT_INSTANCES_IPS=`./getInstancesIPs.sh -f`
 
 	for ip in ${STOCKHOLM_INSTANCES_IPS}
 	do
-		fireViaBombardier "key-stockholm-0.pem" ${ip} ${@} &
+		fireViaBombardier "key-stockholm-0.pem" ${ip} ${@}
 	done
+}
+
+fireFromFrankfurt(){
+	local FRANKFURT_INSTANCES_IPS=`./getInstancesIPs.sh -f`
 
 	for ip in ${FRANKFURT_INSTANCES_IPS}
 	do
-		fireViaBombardier "key-frankfurt-0.pem" ${ip} ${@} &
+		fireViaBombardier "key-frankfurt-0.pem" ${ip} ${@}
 	done
-
-	wait
 }
 
 fireViaBombardier(){
@@ -22,10 +29,11 @@ fireViaBombardier(){
 	local IP=${2}
 	shift 2
 
-	echo "    fires via alpine/bombardier from ${IP}"
+	echo "    Fires via alpine/bombardier from ${IP}"
 
 	for target in ${@}
 	do
+		echo "        on target ${target}"
 		ssh \
 			-i ${KEY} \
 			-o "LogLevel ERROR" \
