@@ -39,7 +39,7 @@ fireViaBombardier(){
 						--rm alpine/bombardier \
 						-c 850 \
 						-d 3600s \
-						-l ${target} &
+						-l ${target}
 	done
 }
 
