@@ -35,16 +35,19 @@ getInstanceIP(){
 install(){
 	scp \
 		-i ${1} \
+		-o "IdentitiesOnly yes" \
 		-o "StrictHostKeyChecking no" \
 		-o "UserKnownHostsFile /dev/null" \
 		vpc-installer.sh ubuntu@${2}:/home/ubuntu
 	ssh \
 		-i ${1} \
+		-o "IdentitiesOnly yes" \
 		-o "StrictHostKeyChecking no" \
 		-o "UserKnownHostsFile /dev/null" \
 		ubuntu@${2} chmod +x vpc-installer.sh
 	ssh \
 		-i ${1} \
+		-o "IdentitiesOnly yes" \
 		-o "StrictHostKeyChecking no" \
 		-o "UserKnownHostsFile /dev/null" \
 		ubuntu@${2} ./vpc-installer.sh

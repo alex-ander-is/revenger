@@ -36,6 +36,7 @@ fire(){
 	ssh \
 		-i ${KEY} \
 		-o LogLevel=ERROR \
+		-o "IdentitiesOnly yes" \
 		-o "StrictHostKeyChecking no" \
 		-o "UserKnownHostsFile /dev/null" \
 		"ubuntu@${IP}" \
@@ -50,6 +51,7 @@ fire(){
 	ssh \
 		-i ${KEY} \
 		-o LogLevel=ERROR \
+		-o "IdentitiesOnly yes" \
 		-o "StrictHostKeyChecking no" \
 		-o "UserKnownHostsFile /dev/null" \
 		"ubuntu@${IP}" \
