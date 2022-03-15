@@ -22,8 +22,7 @@ main(){
 kill(){
 	DOCKER_ID=`sshCommand ${1} ${2} "sudo docker ps -a -q"`
 	[[ ! -z ${DOCKER_ID} ]] &&
-	sshCommand ${1} ${2} "sudo docker kill ${DOCKER_ID}" &&
-	echo "    ${2} ${DOCKER_ID}"
+	sshCommand ${1} ${2} "sudo docker kill ${DOCKER_ID}"
 }
 
 sshCommand(){
