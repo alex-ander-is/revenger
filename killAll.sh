@@ -30,6 +30,7 @@ sshCommand(){
 	ssh \
 		-i ${1} \
 		-o "LogLevel ERROR" \
+		-o "IdentitiesOnly yes" \
 		-o "StrictHostKeyChecking no" \
 		-o "UserKnownHostsFile /dev/null" \
 		"ubuntu@${2}" ${3}
