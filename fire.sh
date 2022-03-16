@@ -1,12 +1,14 @@
 #!/bin/bash
 
 main(){
-	echo "Fire via alpine/bombardier"
+	local COLOR_GREEN=$'\e[1;32m'
+	local RESET_COLOR=$'\e[0m'
+	echo "${COLOR_GREEN}Firing via alpine/bombardier...${RESET_COLOR}"
 	./watchForInstancesStart.sh &&
 	./watchForSSHStart.sh || exit 1
 
 	fireFromStockholm ${@} &
-	fireFromFrankfurt ${@}
+	fireFromFrankfurt ${@} &
 	wait
 }
 
@@ -17,6 +19,7 @@ fireFromStockholm(){
 	do
 		fireViaBombardier "key-stockholm-0.pem" ${ip} ${@} &
 	done
+	wait
 }
 
 fireFromFrankfurt(){
@@ -26,6 +29,7 @@ fireFromFrankfurt(){
 	do
 		fireViaBombardier "key-frankfurt-0.pem" ${ip} ${@} &
 	done
+	wait
 }
 
 fireViaBombardier(){
@@ -35,7 +39,8 @@ fireViaBombardier(){
 
 	for target in ${@}
 	do
-		echo "    from ${IP} on ${target}"
+		echo "    🔥 ${IP} » ${target}"
+
 		ssh \
 			-i ${KEY} \
 			-o "LogLevel ERROR" \
