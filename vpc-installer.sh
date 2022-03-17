@@ -8,5 +8,5 @@ sudo apt-get -y update &&
 sudo apt-cache policy docker-ce &&
 sudo apt-get install -y nload screen docker-ce
 sudo docker pull alpine/bombardier
-sudo docker pull portholeascend/mhddos_proxy
+sudo docker pull ghcr.io/porthole-ascend-cinnamon/mhddos_proxy:latest
 sudo poweroff
