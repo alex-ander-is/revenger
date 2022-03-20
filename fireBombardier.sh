@@ -56,6 +56,5 @@ fire(){
 						-l ${target}
 	done
 }
-./checkAWS.sh && main ${@} || ./awsCliNa.sh
 
-
+main
