@@ -10,7 +10,7 @@ main(){
 	chmod +x *.sh
 
  	# TODO: Check which steps are already done to avoid duplicates
-	./createKey.sh &&
+	./createKeys.sh &&
 	./createSecurityGroup.sh &&
 	./createVanillaUbuntu.sh &&
 	./watchForInstancesStart.sh &&
