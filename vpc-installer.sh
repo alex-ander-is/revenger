@@ -7,6 +7,7 @@ sudo add-apt-repository 'deb [arch=amd64] https://download.docker.com/linux/ubun
 sudo apt-get -y update &&
 sudo apt-cache policy docker-ce &&
 sudo apt-get install -y nload screen docker-ce
-sudo docker pull alpine/bombardier
-sudo docker pull ghcr.io/porthole-ascend-cinnamon/mhddos_proxy:latest
+# sudo docker pull alpine/bombardier
+# sudo docker pull ghcr.io/porthole-ascend-cinnamon/mhddos_proxy:latest
+sudo docker pull egideon/cyber-reaper
 sudo poweroff
