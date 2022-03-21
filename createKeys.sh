@@ -1,53 +1,53 @@
 #!/bin/bash
-# Creates and downloads key pairs 'key-frankfurt-0.pem' & 'key-stockholm-0.pem'
-
-KEY_STOCKHOLM_FILE="key-stockholm-0.pem"
-KEY_FRANKFURT_FILE="key-frankfurt-0.pem"
+# Creates and downloads key pairs
 
 main(){
-	checkKeysExistance
-	createKeys
-}
+	local force=false
 
-checkKeysExistance(){
+	while test $# != 0
+	do
+		case "$1" in
+		-f|--force) force=true ;;
+		--) shift; break;;
+		esac
+		shift
+	done
+
+	local MACHINE_SN=`system_profiler SPHardwareDataType | awk '/Serial\ Number/ {print $4}'`
+	[[ -z ${MACHINE_SN} ]] && exit 1
+
 	local COLOR_RED=$'\e[1;31m'
 	local RESET_COLOR=$'\e[0m'
 
-	[[ -f ${KEY_STOCKHOLM_FILE} ]] &&
-	echo "${COLOR_RED}The key file ${KEY_STOCKHOLM_FILE} for Stockholm already exists!${RESET_COLOR}" &&
-	ls -all ${KEY_STOCKHOLM_FILE} &&
+	KEY_STOCKHOLM="key-stockholm-${MACHINE_SN}"
+	KEY_FRANKFURT="key-frankfurt-${MACHINE_SN}"
+
+	! ${force} && [[ -f "${KEY_STOCKHOLM}.pem" ]] &&
+	ls -all "${KEY_STOCKHOLM}.pem" &&
+	echo "${COLOR_RED}The key file ${KEY_STOCKHOLM}.pem for Stockholm already exists!${RESET_COLOR}" &&
 	exit 1
 
-	[[ -f ${KEY_FRANKFURT_FILE} ]] &&
+	! ${force} && [[ -f "${KEY_FRANKFURT}.pem" ]] &&
 	ls -all ${KEY_FRANKFURT_FILE} &&
-	echo "${COLOR_RED}The key file ${KEY_FRANKFURT_FILE} for Frankfurt already exists!${RESET_COLOR}" &&
+	echo "${COLOR_RED}The key file ${KEY_FRANKFURT}.pem for Frankfurt already exists!${RESET_COLOR}" &&
 	exit 1
-}
 
-createKeys(){
-	createKeyStockholm
-	createKeyFrankfurt
+	${force} && rm -rf *.pem
+
+	createKey "eu-north-1" ${KEY_STOCKHOLM}
+	createKey "eu-central-1" ${KEY_FRANKFURT}
+
 	chmod 600 *.pem
 }
 
-createKeyStockholm(){
-	if ! aws ec2 create-key-pair \
-		--region "eu-north-1" \
-		--key-name "key-stockholm-0" \
+createKey(){
+	aws ec2 create-key-pair \
+		--region ${1} \
+		--key-name ${2} \
 		--key-type rsa \
 		--query "KeyMaterial" \
-		--o text > ${KEY_STOCKHOLM_FILE}
-	then exit 1; fi
+		--o text > "${2}.pem" ||
+	exit 1
 }
 
-createKeyFrankfurt(){
-	if ! aws ec2 create-key-pair \
-		--region "eu-central-1" \
-		--key-name "key-frankfurt-0" \
-		--key-type rsa \
-		--query "KeyMaterial" \
-		--o text > ${KEY_FRANKFURT_FILE}
-	then exit 1; fi
-}
-
-./checkAWS.sh && main || ./awsCliNa.sh
+./checkAWS.sh && main ${@} || ./awsCliNa.sh
