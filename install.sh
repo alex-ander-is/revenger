@@ -11,7 +11,7 @@ main(){
 
  	# TODO: Check which steps are already done to avoid duplicates
 	./createKeys.sh &&
-	./createSecurityGroup.sh &&
+	./createSecurityGroups.sh &&
 	./createVanillaUbuntu.sh &&
 	./watchForInstancesStart.sh &&
 	./watchForSSHStart.sh &&
